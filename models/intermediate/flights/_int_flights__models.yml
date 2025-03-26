@@ -1,0 +1,56 @@
+models:
+  - name: fct_bookings
+    description: Факты бронирований
+    docs:
+      show: true
+      node_color: red
+    latest_version: 1
+    versions:
+      - v: 1
+    config:
+      contract: {enforced: true}
+    meta:
+      owner: staspyatunin@gmail.com
+      contact_tg: thxstas
+      status: in_dev
+
+    columns:
+      - name: book_ref
+        data_type: varchar(8)
+        constraints:
+          - type: not_null
+      - name: book_date
+        data_type: timestamptz
+      - name: total_amount
+        data_type: numeric(10, 2)
+        constraints:
+          - type: check
+            expression: "total_amount > 0"
+        tests:
+          - not_null
+        meta:
+          owner: finance_team
+        quote: true
+
+  - name: fct_ticket_flights
+    description: Факты билетов перелетов
+    docs:
+      show: true
+      node_color: green
+    meta:
+      owner: staspyatunin@gmail.com
+    config:
+      contract: {enforced: true}
+    
+    columns: 
+      - name: ticket_no
+        data_type: bpchar(13)
+      - name: flight_id
+        data_type: int4
+      - name: fare_conditions
+        data_type: varchar(10)
+      - name: amount
+        data_type: numeric(10, 2)
+        constraints:
+          - type: check
+            expression: "amount > 0"
