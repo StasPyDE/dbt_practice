@@ -1,0 +1,17 @@
+seeds:
+  - name: city_region
+    description: Сопоставление регионов и городов
+    config:
+      column_types:
+        city: varchar(50)
+        region: varchar(50)
+    columns:
+      - name: city
+        tests:
+          - not_null
+          - unique
+  
+  - name: emp_passengers
+    config:
+      column_types:
+        passenger_id: varchar(20)
