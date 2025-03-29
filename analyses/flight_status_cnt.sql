@@ -13,6 +13,6 @@ select
     {% for status in statuses %}
     sum(case when status = '{{ status }}' then 1 else 0 end) 
     as {% if status == 'On Time' %} status_On_Time {% else %} status_{{ status }} {%- endif %}
-    {%- if not loop.last %}, {% endif %}
+    {%- if not loop['last'] %}, {% endif %}
     {% endfor %}
 from {{ ref('stg_flights__flights') }};
