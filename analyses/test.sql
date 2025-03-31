@@ -1,0 +1,1 @@
+select {{ show_columns_relation('fct_bookings') }} from {{ ref('fct_bookings') }};
