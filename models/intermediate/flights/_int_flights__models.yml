@@ -15,7 +15,7 @@ models:
 
     columns:
       - name: book_ref
-        data_type: varchar(8)
+        data_type: bigint
         constraints:
           - type: not_null
       - name: book_date
