@@ -14,6 +14,8 @@ models:
         status: in_dev
 
     columns:
+      - name: booking_sk
+        data_type: text
       - name: book_ref
         data_type: bigint
         constraints:
@@ -30,6 +32,15 @@ models:
         meta:
           owner: finance_team
         quote: true
+
+  - name: fct_flights
+    description: Факты полетов
+    docs:
+      show: true
+      node_color: red
+    tests:
+      - dbt_utils.equal_rowcount:
+          compare_model: ref('stg_flights__flights')
 
   - name: fct_ticket_flights
     description: Факты билетов перелетов

@@ -31,25 +31,23 @@ clean-targets:         # directories to be removed by `dbt clean`
 # files using the `{{ config(...) }}` macro.
 models:
   +post_hook:
-    - "
+    "
       CREATE SCHEMA IF NOT EXISTS logs;
+
       CREATE TABLE IF NOT EXISTS {{ target.database }}.logs.dbt_logs (
-        event_date timestamp,
-        event_name varchar(100),
-        node_name varchar(255)
+          event_date timestamp,
+          event_name varchar(100),
+          node_name varchar(255)
       );
 
       INSERT INTO {{ target.database }}.logs.dbt_logs
       (event_date, event_name, node_name)
       VALUES(
-        CURRENT_TIMESTAMP, 'run_model', '{{ model.name }}'
-      )
+          CURRENT_TIMESTAMP, 'run model', '{{ model.name }}'
+      );
+
+      {% do check_dependencies() %}
     "
-    - "
-    {% if execute %}
-      {{ check_dependencies() }}
-    {% endif %}"
-    
   dbt_practice:
     # Config indicated by + and applies to all files under models/example/
     +meta:
